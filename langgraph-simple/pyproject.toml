@@ -1,0 +1,16 @@
+[project]
+name = "agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "firecrawl-py>=2.13.0",
+    "langchain>=0.3.23",
+    "langchain-community>=0.3.26",
+    "langchain-openai>=0.3.12",
+    "langgraph>=0.3.25",
+    "langgraph-cli[inmem]>=0.1.89",
+    "notebook>=7.3.3",
+    "pydantic-settings>=2.8.1",
+]
