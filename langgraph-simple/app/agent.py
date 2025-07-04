@@ -64,7 +64,8 @@ class Agent:
     def ask_human(self, state: AgentState) -> Command[Literal[Nodes.AGENT]]:
         logger.info("-------------- Asking Human --------------")
         human_role = interrupt("Please provide a role you are interested in applying?")
-        return Command(goto=Nodes.AGENT, update={"role": human_role})
+        query = f"{state['query']}, for the role {human_role}"
+        return Command(goto=Nodes.AGENT, update={"query": query, "role": human_role})
 
     def agent(self, state: AgentState) -> Command[Literal[Nodes.TOOLS]]:
         logger.info("-------------- Calling Agent --------------")
