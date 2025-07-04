@@ -3,7 +3,9 @@ from typing import Annotated
 from mcp.server.fastmcp import FastMCP
 from pydantic import BaseModel, Field
 from firecrawl import FirecrawlApp, ScrapeOptions
+from dotenv import load_dotenv
 
+load_dotenv()
 
 mcp = FastMCP("mcp")
 app = FirecrawlApp()
