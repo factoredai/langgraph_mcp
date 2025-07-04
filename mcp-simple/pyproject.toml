@@ -1,0 +1,9 @@
+[project]
+name = "mcp-simple"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.10.1",
+ "firecrawl-py>=2.14.0",
+ "mcp[cli]>=1.10.1",
+]
