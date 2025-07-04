@@ -35,7 +35,7 @@ class Agent:
         self.pg = Prompts
 
     def _create_graph(self):
-        graph = StateGraph(AgentState, input=MessagesState)
+        graph = StateGraph(AgentState, input=MessagesState)  # type: ignore
         graph.add_node(Nodes.INIT, self.init)
         graph.add_node(Nodes.ROUTER, self.router)
         graph.add_node(Nodes.ASK_HUMAN, self.ask_human)
@@ -56,7 +56,7 @@ class Agent:
         logger.info("-------------- Routing --------------")
         prompt = self.pg.router(state)
         llm = self.llm.with_structured_output(RoleOutput)
-        ai_response: RoleOutput = llm.invoke(prompt)
+        ai_response: RoleOutput = llm.invoke(prompt)  # type: ignore
         if ai_response.role:
             return Command(goto=Nodes.AGENT, update={"role": ai_response.role})
         return Command(goto=Nodes.ASK_HUMAN)
@@ -67,12 +67,12 @@ class Agent:
         query = f"{state['query']}, for the role {human_role}"
         return Command(goto=Nodes.AGENT, update={"query": query, "role": human_role})
 
-    def agent(self, state: AgentState) -> Command[Literal[Nodes.TOOLS]]:
+    def agent(self, state: AgentState) -> Command[Literal[Nodes.TOOLS, Nodes.END]]:
         logger.info("-------------- Calling Agent --------------")
         llm = self.llm.bind_tools(agent_tools)
         prompt = self.pg.agent(state)
         response = llm.invoke(prompt)
-        if response.tool_calls:
+        if response.tool_calls:  # type: ignore
             return Command(goto=Nodes.TOOLS, update={"messages": response})
         return Command(goto=Nodes.END, update={"messages": response})
 

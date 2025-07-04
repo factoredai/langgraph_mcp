@@ -47,7 +47,7 @@ def scrape_job_postings_links(
         path = DATA_DIR / company
         path.mkdir(exist_ok=True)
         with open(path / f"{file_name}.txt", "w") as f:
-            f.write(page.markdown)
+            f.write(page.markdown)  # type: ignore
     return data, links
 
 
