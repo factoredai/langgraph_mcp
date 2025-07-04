@@ -20,7 +20,7 @@ class SearchResult(BaseModel):
 @tool
 def search_web(
     query: Annotated[str, "The query to search the web"],
-) -> str:
+) -> list[SearchResult]:
     """
     A tool to search the web for job posting for a specific company.
     """
@@ -34,7 +34,7 @@ def search_web(
 def scrape_job_postings_links(
     company: Annotated[str, "The company name"],
     links: Annotated[list[str], "The job posting links to scrape"],
-) -> tuple[str, str]:
+) -> tuple[str, list[str]]:
     """
     A tool to scrape the links of job postings in batch and return the content.
     """

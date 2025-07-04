@@ -1,9 +1,6 @@
-from typing import TypedDict
+from langgraph.graph import MessagesState
 
 
-class InputState(TypedDict):
+class AgentState(MessagesState):
     query: str
-
-
-class AgentState(InputState):
     role: str

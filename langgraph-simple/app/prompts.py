@@ -1,9 +1,12 @@
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage, AnyMessage
+from .state import AgentState
 
 
 class Prompts:
     @staticmethod
-    def gen_prompt(system_prompt, user_prompt, state):
+    def gen_prompt(
+        system_prompt: str, user_prompt: str, state: AgentState
+    ) -> list[AnyMessage]:
         user_prompt = user_prompt.format(**state)
         messages = [
             SystemMessage(content=system_prompt),
@@ -12,7 +15,7 @@ class Prompts:
         return messages
 
     @classmethod
-    def router(cls, state):
+    def router(cls, state: AgentState) -> list[AnyMessage]:
         ROUTER_SYSTEM = """
         You are HR expert. Your job on this step is to determine the role the user is applying for.
         Focus on a specific role like engineer, data scientist, recruiter, accountant, etc. 
@@ -39,7 +42,7 @@ class Prompts:
         return cls.gen_prompt(ROUTER_SYSTEM, ROUTER_PROMPT, state)
 
     @classmethod
-    def agent(cls, state):
+    def agent(cls, state: AgentState) -> list[AnyMessage]:
         AGENT_SYSTEM = """
         You are HR expert. Your job on this step is to provide the user with the best job postings for the role and company they are applying for.
         If there are no job postings for the role, you should say so. Do no make up any job postings, only use the ones provided.
