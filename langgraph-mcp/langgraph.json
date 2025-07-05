@@ -1,0 +1,9 @@
+{
+    "dependencies": [
+        "."
+    ],
+    "graphs": {
+        "agent_mcp": "app:graph"
+    },
+    "env": "./.env"
+}

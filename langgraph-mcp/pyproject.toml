@@ -1,0 +1,14 @@
+[project]
+name = "langgraph-mcp"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp>=2.10.1",
+    "firecrawl-py>=2.14.0",
+    "langchain-mcp-adapters>=0.1.8",
+    "langchain[openai]>=0.3.26",
+    "langgraph>=0.5.1",
+    "langgraph-cli[inmem]>=0.1.89",
+    "mcp[cli]>=1.10.1",
+    "notebook>=7.4.4",
+]
